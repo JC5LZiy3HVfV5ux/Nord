@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/JC5LZiy3HVfV5ux/openweather-cache-server/server/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -25,6 +26,7 @@ type ServerConfig struct {
 
 func NewServer(config *ServerConfig) *Server {
 	router := mux.NewRouter()
+	handlers.RegisterHandlers(router)
 
 	return &Server{
 		&http.Server{
