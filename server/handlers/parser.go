@@ -55,16 +55,10 @@ func (p parser) parseCityID(query url.Values) (id int64, err error) {
 	return
 }
 
-func (p parser) parseZipCode(query url.Values) (zip int64, err error) {
+func (p parser) parseZipCode(query url.Values) (zip string, err error) {
 	if query.Get("zip") == "" {
 		err = errors.New("empty zip")
 		return
 	}
-
-	if zip, err = strconv.ParseInt(query.Get("zip"), 10, 64); err != nil {
-		err = errors.New("invalid zip")
-		return
-	}
-
 	return
 }

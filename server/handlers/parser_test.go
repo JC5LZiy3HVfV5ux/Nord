@@ -172,13 +172,6 @@ func TestZipCode(t *testing.T) {
 			"empty zip",
 		},
 		{
-			"zip is invalid",
-			map[string][]string{
-				"zip": {"ttt"},
-			},
-			"invalid zip",
-		},
-		{
 			"successful test",
 			map[string][]string{
 				"zip": {"10"},
