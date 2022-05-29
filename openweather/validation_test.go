@@ -16,10 +16,9 @@ func TestValidLongitude(t *testing.T) {
 		{"longitude = -180", -180, true},
 	}
 
-	v := Validator{}
 	for _, d := range data {
 		t.Run(d.name, func(t *testing.T) {
-			if ok := v.ValidLongitude(d.lon); ok != d.ok {
+			if ok := ValidLongitude(d.lon); ok != d.ok {
 				t.Errorf("Expected `%t`, got `%t`",
 					d.ok, ok)
 			}
@@ -39,10 +38,9 @@ func TestValidLatitude(t *testing.T) {
 		{"longitude = -90", -90, true},
 	}
 
-	v := Validator{}
 	for _, d := range data {
 		t.Run(d.name, func(t *testing.T) {
-			if ok := v.ValidLatitude(d.lon); ok != d.ok {
+			if ok := ValidLatitude(d.lon); ok != d.ok {
 				t.Errorf("Expected `%t`, got `%t`",
 					d.ok, ok)
 			}

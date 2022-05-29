@@ -2,23 +2,21 @@ package openweather
 
 import "errors"
 
-type Validator struct{}
-
-func (v Validator) ValidCoordinates(lat, lon float64) error {
-	if !v.ValidLatitude(lat) {
+func ValidCoordinates(lat, lon float64) error {
+	if !ValidLatitude(lat) {
 		return errors.New("invalid latitude")
 	}
-	if !v.ValidLongitude(lon) {
+	if !ValidLongitude(lon) {
 		return errors.New("invalid longitude")
 	}
 	return nil
 }
 
-func (v Validator) ValidLongitude(lon float64) bool {
+func ValidLongitude(lon float64) bool {
 	return lon >= -180 && lon <= 180
 }
 
-func (v Validator) ValidLatitude(lat float64) bool {
+func ValidLatitude(lat float64) bool {
 	return lat >= -90 && lat <= 90
 }
 
@@ -74,7 +72,7 @@ var langs = map[string]string{
 	"zu":    "Zulu",
 }
 
-func (v Validator) ValidLang(lang string) bool {
+func ValidLang(lang string) bool {
 	if _, ok := langs[lang]; ok {
 		return true
 	}
@@ -88,7 +86,7 @@ var units = map[string]string{
 	"standard": "Kelvin ",
 }
 
-func (v Validator) ValidUnit(unit string) bool {
+func ValidUnit(unit string) bool {
 	if _, ok := units[unit]; ok {
 		return true
 	}
