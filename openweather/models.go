@@ -120,7 +120,7 @@ type geocodingData struct {
 
 type ListGeocodingData []geocodingData
 
-type Zip struct {
+type ZipGeocodingData struct {
 	Zip     string  `json:"zip"`
 	Name    string  `json:"name"`
 	Lat     float64 `json:"lat"`

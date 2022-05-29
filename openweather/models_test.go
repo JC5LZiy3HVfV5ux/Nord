@@ -355,7 +355,7 @@ func TestListGeocodingDataModel(t *testing.T) {
 	}
 }
 
-func TestGeocodingByZipModel(t *testing.T) {
+func TestGeocodingByZipGeocodingDataModel(t *testing.T) {
 	zipGeocodingDataJson := `{
 		"zip": "90210",
 		"name": "Beverly Hills",
@@ -364,7 +364,7 @@ func TestGeocodingByZipModel(t *testing.T) {
 		"country": "US"
 	  }`
 
-	model := Zip{}
+	model := ZipGeocodingData{}
 	if err := json.NewDecoder(strings.NewReader(zipGeocodingDataJson)).Decode(&model); err != nil {
 		t.Error(err)
 	}
