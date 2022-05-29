@@ -1,6 +1,18 @@
 package openweather
 
+import "errors"
+
 type Validator struct{}
+
+func (v Validator) ValidCoordinates(lat, lon float64) error {
+	if !v.ValidLatitude(lat) {
+		return errors.New("invalid latitude")
+	}
+	if !v.ValidLongitude(lon) {
+		return errors.New("invalid longitude")
+	}
+	return nil
+}
 
 func (v Validator) ValidLongitude(lon float64) bool {
 	return lon >= -180 && lon <= 180
