@@ -33,7 +33,7 @@ func (f *forecast) ForecastByCoordinates(ctx context.Context, model *ForecastDat
 	return nil
 }
 
-func (f *forecast) ForecastByCityName(ctx context.Context, model *ForecastData, q string, cnt int) error {
+func (f *forecast) ForecastByCityName(ctx context.Context, model *ForecastData, q string, cnt uint64) error {
 	values := url.Values{}
 	values.Add("q", q)
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
@@ -43,7 +43,7 @@ func (f *forecast) ForecastByCityName(ctx context.Context, model *ForecastData, 
 	return nil
 }
 
-func (f *forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id int64, cnt int) error {
+func (f *forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id int64, cnt uint64) error {
 	values := url.Values{}
 	values.Add("id", fmt.Sprintf("%d", id))
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
@@ -53,7 +53,7 @@ func (f *forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id
 	return nil
 }
 
-func (f *forecast) ForecastByZip(ctx context.Context, model *ForecastData, zip string, cnt int) error {
+func (f *forecast) ForecastByZip(ctx context.Context, model *ForecastData, zip string, cnt uint64) error {
 	values := url.Values{}
 	values.Add("zip", zip)
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
