@@ -7,19 +7,19 @@ import (
 	"net/url"
 )
 
-type currentWeather struct {
+type CurrentWeather struct {
 	opt    *options
 	sender *sender
 }
 
-func newCurrentWeather(client *http.Client, opt *options) *currentWeather {
-	return &currentWeather{
+func newCurrentWeather(client *http.Client, opt *options) *CurrentWeather {
+	return &CurrentWeather{
 		opt:    opt,
 		sender: newSender(client),
 	}
 }
 
-func (c *currentWeather) CurrentByCoordinates(ctx context.Context, model *CurrentWeatherData, lat, lon float64) error {
+func (c *CurrentWeather) CurrentByCoordinates(ctx context.Context, model *CurrentWeatherData, lat, lon float64) error {
 	if err := ValidCoordinates(lat, lon); err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func (c *currentWeather) CurrentByCoordinates(ctx context.Context, model *Curren
 	return nil
 }
 
-func (c *currentWeather) CurrentByCityName(ctx context.Context, model *CurrentWeatherData, q string) error {
+func (c *CurrentWeather) CurrentByCityName(ctx context.Context, model *CurrentWeatherData, q string) error {
 	values := url.Values{}
 	values.Add("q", q)
 	if err := c.sender.do(ctx, http.MethodGet, c.buildPath(values), model, nil); err != nil {
@@ -41,7 +41,7 @@ func (c *currentWeather) CurrentByCityName(ctx context.Context, model *CurrentWe
 	return nil
 }
 
-func (c *currentWeather) CurrentByCityId(ctx context.Context, model *CurrentWeatherData, id int64) error {
+func (c *CurrentWeather) CurrentByCityId(ctx context.Context, model *CurrentWeatherData, id int64) error {
 	values := url.Values{}
 	values.Add("id", fmt.Sprintf("%d", id))
 	if err := c.sender.do(ctx, http.MethodGet, c.buildPath(values), model, nil); err != nil {
@@ -50,7 +50,7 @@ func (c *currentWeather) CurrentByCityId(ctx context.Context, model *CurrentWeat
 	return nil
 }
 
-func (c *currentWeather) CurrentByZip(ctx context.Context, model *CurrentWeatherData, zip string) error {
+func (c *CurrentWeather) CurrentByZip(ctx context.Context, model *CurrentWeatherData, zip string) error {
 	values := url.Values{}
 	values.Add("zip", zip)
 	if err := c.sender.do(ctx, http.MethodGet, c.buildPath(values), model, nil); err != nil {
@@ -59,7 +59,7 @@ func (c *currentWeather) CurrentByZip(ctx context.Context, model *CurrentWeather
 	return nil
 }
 
-func (c *currentWeather) buildPath(values url.Values) string {
+func (c *CurrentWeather) buildPath(values url.Values) string {
 	for k, v := range c.opt.getMap() {
 		values.Add(k, v)
 	}

@@ -12,9 +12,9 @@ const (
 
 type Client struct {
 	opt            *options
-	currentWeather *currentWeather
-	forecast       *forecast
-	geocoding      *geocoding
+	currentWeather *CurrentWeather
+	forecast       *Forecast
+	geocoding      *Geocoding
 }
 
 func NewClient(key string, customer ...*http.Client) (*Client, error) {
@@ -52,14 +52,14 @@ func (c *Client) SetUnit(unit string) error {
 	return nil
 }
 
-func (c *Client) CurrentWeather() *currentWeather {
+func (c *Client) CurrentWeather() *CurrentWeather {
 	return c.currentWeather
 }
 
-func (c *Client) Forecast() *forecast {
+func (c *Client) Forecast() *Forecast {
 	return c.forecast
 }
 
-func (c *Client) Geocoding() *geocoding {
+func (c *Client) Geocoding() *Geocoding {
 	return c.geocoding
 }

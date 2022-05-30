@@ -7,19 +7,19 @@ import (
 	"net/url"
 )
 
-type geocoding struct {
+type Geocoding struct {
 	opt    *options
 	sender *sender
 }
 
-func newGeocoding(client *http.Client, opt *options) *geocoding {
-	return &geocoding{
+func newGeocoding(client *http.Client, opt *options) *Geocoding {
+	return &Geocoding{
 		opt:    opt,
 		sender: newSender(client),
 	}
 }
 
-func (g *geocoding) GeocodingByCoordinates(ctx context.Context, model *ListGeocodingData, lat, lon float64, limit uint64) error {
+func (g *Geocoding) GeocodingByCoordinates(ctx context.Context, model *ListGeocodingData, lat, lon float64, limit uint64) error {
 	if err := ValidCoordinates(lat, lon); err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func (g *geocoding) GeocodingByCoordinates(ctx context.Context, model *ListGeoco
 	return nil
 }
 
-func (g *geocoding) GeocodingByCityName(ctx context.Context, model *ListGeocodingData, q string, limit uint64) error {
+func (g *Geocoding) GeocodingByCityName(ctx context.Context, model *ListGeocodingData, q string, limit uint64) error {
 	values := url.Values{}
 	values.Add("q", q)
 	values.Add("limit", fmt.Sprintf("%d", limit))
@@ -43,7 +43,7 @@ func (g *geocoding) GeocodingByCityName(ctx context.Context, model *ListGeocodin
 	return nil
 }
 
-func (g *geocoding) GeocodingByZip(ctx context.Context, model *ZipGeocodingData, zip string) error {
+func (g *Geocoding) GeocodingByZip(ctx context.Context, model *ZipGeocodingData, zip string) error {
 	values := url.Values{}
 	values.Add("zip", zip)
 	if err := g.sender.do(ctx, http.MethodGet, g.buildPath("zip?", values), model, nil); err != nil {
@@ -52,7 +52,7 @@ func (g *geocoding) GeocodingByZip(ctx context.Context, model *ZipGeocodingData,
 	return nil
 }
 
-func (g *geocoding) buildPath(path string, values url.Values) string {
+func (g *Geocoding) buildPath(path string, values url.Values) string {
 	values.Add("appid", g.opt.key)
 	return geoUrl + path + values.Encode()
 }

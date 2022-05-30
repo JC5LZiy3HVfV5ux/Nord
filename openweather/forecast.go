@@ -7,19 +7,19 @@ import (
 	"net/url"
 )
 
-type forecast struct {
+type Forecast struct {
 	opt    *options
 	sender *sender
 }
 
-func newForecast(client *http.Client, opt *options) *forecast {
-	return &forecast{
+func newForecast(client *http.Client, opt *options) *Forecast {
+	return &Forecast{
 		opt:    opt,
 		sender: newSender(client),
 	}
 }
 
-func (f *forecast) ForecastByCoordinates(ctx context.Context, model *ForecastData, lat, lon float64, cnt int) error {
+func (f *Forecast) ForecastByCoordinates(ctx context.Context, model *ForecastData, lat, lon float64, cnt int) error {
 	if err := ValidCoordinates(lat, lon); err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func (f *forecast) ForecastByCoordinates(ctx context.Context, model *ForecastDat
 	return nil
 }
 
-func (f *forecast) ForecastByCityName(ctx context.Context, model *ForecastData, q string, cnt uint64) error {
+func (f *Forecast) ForecastByCityName(ctx context.Context, model *ForecastData, q string, cnt uint64) error {
 	values := url.Values{}
 	values.Add("q", q)
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
@@ -43,7 +43,7 @@ func (f *forecast) ForecastByCityName(ctx context.Context, model *ForecastData, 
 	return nil
 }
 
-func (f *forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id int64, cnt uint64) error {
+func (f *Forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id int64, cnt uint64) error {
 	values := url.Values{}
 	values.Add("id", fmt.Sprintf("%d", id))
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
@@ -53,7 +53,7 @@ func (f *forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id
 	return nil
 }
 
-func (f *forecast) ForecastByZip(ctx context.Context, model *ForecastData, zip string, cnt uint64) error {
+func (f *Forecast) ForecastByZip(ctx context.Context, model *ForecastData, zip string, cnt uint64) error {
 	values := url.Values{}
 	values.Add("zip", zip)
 	values.Add("cnt", fmt.Sprintf("%d", cnt))
@@ -63,7 +63,7 @@ func (f *forecast) ForecastByZip(ctx context.Context, model *ForecastData, zip s
 	return nil
 }
 
-func (f *forecast) buildPath(values url.Values) string {
+func (f *Forecast) buildPath(values url.Values) string {
 	for k, v := range f.opt.getMap() {
 		values.Add(k, v)
 	}
