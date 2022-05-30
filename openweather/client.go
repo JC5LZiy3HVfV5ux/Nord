@@ -10,14 +10,14 @@ const (
 	geoUrl  = "http://api.openweathermap.org/geo/1.0/"
 )
 
-type client struct {
+type Client struct {
 	opt            *options
 	currentWeather *currentWeather
 	forecast       *forecast
 	geocoding      *geocoding
 }
 
-func NewClient(key string, customer ...*http.Client) (*client, error) {
+func NewClient(key string, customer ...*http.Client) (*Client, error) {
 	if key == "" {
 		return nil, errors.New("api key is empty")
 	}
@@ -28,7 +28,7 @@ func NewClient(key string, customer ...*http.Client) (*client, error) {
 
 	opt := initOptions(key)
 
-	return &client{
+	return &Client{
 		opt:            opt,
 		currentWeather: newCurrentWeather(customer[0], opt),
 		forecast:       newForecast(customer[0], opt),
@@ -36,7 +36,7 @@ func NewClient(key string, customer ...*http.Client) (*client, error) {
 	}, nil
 }
 
-func (c *client) SetLang(lang string) error {
+func (c *Client) SetLang(lang string) error {
 	if !ValidLang(lang) {
 		return errors.New("invalid lang code")
 	}
@@ -44,7 +44,7 @@ func (c *client) SetLang(lang string) error {
 	return nil
 }
 
-func (c *client) SetUnit(unit string) error {
+func (c *Client) SetUnit(unit string) error {
 	if !ValidUnit(unit) {
 		return errors.New("invalid unit")
 	}
@@ -52,14 +52,14 @@ func (c *client) SetUnit(unit string) error {
 	return nil
 }
 
-func (c *client) CurrentWeather() *currentWeather {
+func (c *Client) CurrentWeather() *currentWeather {
 	return c.currentWeather
 }
 
-func (c *client) Forecast() *forecast {
+func (c *Client) Forecast() *forecast {
 	return c.forecast
 }
 
-func (c *client) Geocoding() *geocoding {
+func (c *Client) Geocoding() *geocoding {
 	return c.geocoding
 }
