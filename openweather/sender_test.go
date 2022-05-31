@@ -66,7 +66,7 @@ func TestDo(t *testing.T) {
 			server.URL + "?mode=1",
 			&ZipGeocodingData{},
 			&ZipGeocodingData{},
-			"400,wrong longitude",
+			"wrong longitude",
 		},
 		{
 			"unauthorized request",
@@ -74,7 +74,7 @@ func TestDo(t *testing.T) {
 			server.URL + "?mode=2",
 			&ZipGeocodingData{},
 			&ZipGeocodingData{},
-			"401,Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.",
+			"Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.",
 		},
 		{
 			"successful request",

@@ -412,12 +412,12 @@ func TestHttpErrorModel(t *testing.T) {
 		{
 			"http code is int",
 			`{"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}`,
-			"401,Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.",
+			"Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.",
 		},
 		{
 			"http code is string",
 			`{"cod":"400","message":"wrong longitude"}`,
-			"400,wrong longitude",
+			"wrong longitude",
 		},
 	}
 
@@ -439,7 +439,7 @@ func TestHttpErrorModel(t *testing.T) {
 }
 
 func TestUrlIconWeather(t *testing.T) {
-	weather := weather{}
+	weather := Weather{}
 	weather.Icon = "01n"
 
 	urlIconWeather := "https://openweathermap.org/img/wn/01n.png"

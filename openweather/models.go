@@ -13,15 +13,15 @@ var iconUrl = "https://openweathermap.org/img/wn/%s.png"
 var errUnknownValueCustomInt = errors.New("customInt: parsing unknown value")
 
 type CurrentWeatherData struct {
-	Coord      coord     `json:"coord"`
-	Weather    []weather `json:"weather"`
+	Coord      Coord     `json:"coord"`
+	Weather    []Weather `json:"weather"`
 	Base       string    `json:"base"`
-	Main       main      `json:"main"`
+	Main       Main      `json:"main"`
 	Visibility int       `json:"visibility"`
-	Wind       wind      `json:"wind"`
-	Clouds     clouds    `json:"clouds"`
+	Wind       Wind      `json:"wind"`
+	Clouds     Clouds    `json:"clouds"`
 	Dt         int       `json:"dt"`
-	Sys        sys       `json:"sys"`
+	Sys        Sys       `json:"sys"`
 	Timezone   int       `json:"timezone"`
 	Id         int       `json:"id"`
 	Name       string    `json:"name"`
@@ -32,21 +32,21 @@ type ForecastData struct {
 	Cod     string         `json:"cod"`
 	Message float64        `json:"message"`
 	Cnt     int            `json:"cnt"`
-	List    []forecastList `json:"list"`
-	City    city           `json:"city"`
+	List    []ForecastList `json:"list"`
+	City    City           `json:"city"`
 }
 
-type forecastList struct {
+type ForecastList struct {
 	Dt   int `json:"dt"`
 	Main struct {
-		main
+		Main
 		SeaLevel  int     `json:"sea_level"`
 		GrndLevel int     `json:"grnd_level"`
 		TempKf    float64 `json:"temp_kf"`
 	} `json:"main"`
-	Weather    []weather `json:"weather"`
-	Clouds     clouds    `json:"clouds"`
-	Wind       wind      `json:"wind"`
+	Weather    []Weather `json:"weather"`
+	Clouds     Clouds    `json:"clouds"`
+	Wind       Wind      `json:"wind"`
 	Visibility int       `json:"visibility"`
 	Pop        float64   `json:"pop"`
 	Sys        struct {
@@ -55,10 +55,10 @@ type forecastList struct {
 	DtTxt string `json:"dt_txt"`
 }
 
-type city struct {
+type City struct {
 	Id         int    `json:"id"`
 	Name       string `json:"name"`
-	Coord      coord  `json:"coord"`
+	Coord      Coord  `json:"coord"`
 	Country    string `json:"country"`
 	Population int    `json:"population"`
 	Timezone   int    `json:"timezone"`
@@ -66,23 +66,23 @@ type city struct {
 	Sunset     int    `json:"sunset"`
 }
 
-type coord struct {
+type Coord struct {
 	Lon float64 `json:"lon"`
 	Lat float64 `json:"lat"`
 }
 
-type weather struct {
+type Weather struct {
 	Id          int    `json:"id"`
 	Main        string `json:"main"`
 	Description string `json:"description"`
 	Icon        string `json:"icon"`
 }
 
-func (w *weather) UrlIconWeather() string {
+func (w *Weather) UrlIconWeather() string {
 	return fmt.Sprintf(iconUrl, w.Icon)
 }
 
-type main struct {
+type Main struct {
 	Temp      float64 `json:"temp"`
 	FeelsLike float64 `json:"feels_like"`
 	TempMin   float64 `json:"temp_min"`
@@ -91,17 +91,17 @@ type main struct {
 	Humidity  int     `json:"humidity"`
 }
 
-type wind struct {
+type Wind struct {
 	Speed float64 `json:"speed"`
 	Deg   float64 `json:"deg"`
 	Gust  float64 `json:"gust"`
 }
 
-type clouds struct {
+type Clouds struct {
 	All int `json:"all"`
 }
 
-type sys struct {
+type Sys struct {
 	Type    int    `json:"type"`
 	Id      int    `json:"id"`
 	Country string `json:"country"`
@@ -109,7 +109,7 @@ type sys struct {
 	Sunset  int    `json:"sunset"`
 }
 
-type geocodingData struct {
+type GeocodingData struct {
 	Name       string            `json:"name"`
 	LocalNames map[string]string `json:"local_names"`
 	Lat        float64           `json:"lat"`
@@ -118,7 +118,7 @@ type geocodingData struct {
 	State      string            `json:"state"`
 }
 
-type ListGeocodingData []geocodingData
+type ListGeocodingData []GeocodingData
 
 type ZipGeocodingData struct {
 	Zip     string  `json:"zip"`
@@ -139,7 +139,7 @@ type HttpError struct {
 }
 
 func (e *HttpError) Error() string {
-	return fmt.Sprintf("%d", e.Cod) + "," + e.Message
+	return e.Message
 }
 
 func httpErrorFromJson(r io.Reader) error {
