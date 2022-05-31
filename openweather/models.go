@@ -133,17 +133,17 @@ type ZipGeocodingData struct {
 // {"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}
 // {"cod":"400","message":"wrong longitude"}
 //
-type httpError struct {
+type HttpError struct {
 	Cod     customInt `json:"cod"`
 	Message string    `json:"message"`
 }
 
-func (e *httpError) Error() string {
+func (e *HttpError) Error() string {
 	return fmt.Sprintf("%d", e.Cod) + "," + e.Message
 }
 
 func httpErrorFromJson(r io.Reader) error {
-	httpError := &httpError{}
+	httpError := &HttpError{}
 	if err := json.NewDecoder(r).Decode(&httpError); err != nil {
 		return err
 	}
