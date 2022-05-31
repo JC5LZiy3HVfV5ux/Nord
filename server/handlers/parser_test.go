@@ -9,6 +9,8 @@ func TestParseCoordinates(t *testing.T) {
 	data := []struct {
 		name   string
 		query  url.Values
+		lat    float64
+		lon    float64
 		errMsg string
 	}{
 		{
@@ -17,6 +19,8 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {""},
 				"lon": {""},
 			},
+			0,
+			0,
 			"empty latitude",
 		},
 		{
@@ -25,6 +29,8 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {"10"},
 				"lon": {""},
 			},
+			0,
+			0,
 			"empty longitude",
 		},
 		{
@@ -33,6 +39,8 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {"ttt"},
 				"lon": {"10"},
 			},
+			0,
+			0,
 			"invalid latitude",
 		},
 		{
@@ -41,6 +49,8 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {"10"},
 				"lon": {"ttt"},
 			},
+			10,
+			0,
 			"invalid longitude",
 		},
 		{
@@ -49,6 +59,8 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {"10"},
 				"lon": {"10"},
 			},
+			10,
+			10,
 			"",
 		},
 	}
@@ -57,7 +69,12 @@ func TestParseCoordinates(t *testing.T) {
 
 	for _, d := range data {
 		t.Run(d.name, func(t *testing.T) {
-			_, _, err := p.parseCoordinates(d.query)
+			lat, lon, err := p.parseCoordinates(d.query)
+
+			if lat != d.lat || lon != d.lon {
+				t.Errorf("Expected coordinates lat: `%f` lon: `%f`, got lat: `%f` lon: `%f`",
+					d.lat, d.lon, lat, lon)
+			}
 
 			var errMsg string
 			if err != nil {
@@ -75,6 +92,7 @@ func TestParseCityName(t *testing.T) {
 	data := []struct {
 		name   string
 		query  url.Values
+		q      string
 		errMsg string
 	}{
 		{
@@ -82,6 +100,7 @@ func TestParseCityName(t *testing.T) {
 			map[string][]string{
 				"q": {""},
 			},
+			"",
 			"empty q",
 		},
 		{
@@ -89,6 +108,7 @@ func TestParseCityName(t *testing.T) {
 			map[string][]string{
 				"q": {"London"},
 			},
+			"London",
 			"",
 		},
 	}
@@ -97,7 +117,12 @@ func TestParseCityName(t *testing.T) {
 
 	for _, d := range data {
 		t.Run(d.name, func(t *testing.T) {
-			_, err := p.parseCityName(d.query)
+			q, err := p.parseCityName(d.query)
+
+			if q != d.q {
+				t.Errorf("Expected city name `%s`, got `%s`",
+					d.q, q)
+			}
 
 			var errMsg string
 			if err != nil {
@@ -115,6 +140,7 @@ func TestParseCityID(t *testing.T) {
 	data := []struct {
 		name   string
 		query  url.Values
+		id     int64
 		errMsg string
 	}{
 		{
@@ -122,6 +148,7 @@ func TestParseCityID(t *testing.T) {
 			map[string][]string{
 				"id": {""},
 			},
+			0,
 			"empty id",
 		},
 		{
@@ -129,6 +156,7 @@ func TestParseCityID(t *testing.T) {
 			map[string][]string{
 				"id": {"ttt"},
 			},
+			0,
 			"invalid id",
 		},
 		{
@@ -136,6 +164,7 @@ func TestParseCityID(t *testing.T) {
 			map[string][]string{
 				"id": {"10"},
 			},
+			10,
 			"",
 		},
 	}
@@ -144,7 +173,12 @@ func TestParseCityID(t *testing.T) {
 
 	for _, d := range data {
 		t.Run(d.name, func(t *testing.T) {
-			_, err := p.parseCityID(d.query)
+			id, err := p.parseCityID(d.query)
+
+			if id != d.id {
+				t.Errorf("Expected id `%d`, got `%d`",
+					d.id, id)
+			}
 
 			var errMsg string
 			if err != nil {
