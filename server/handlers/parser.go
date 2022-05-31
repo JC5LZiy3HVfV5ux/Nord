@@ -56,7 +56,7 @@ func (p parser) parseCityID(query url.Values) (id int64, err error) {
 }
 
 func (p parser) parseZipCode(query url.Values) (zip string, err error) {
-	if query.Get("zip") == "" {
+	if zip = query.Get("zip"); zip == "" {
 		err = errors.New("empty zip")
 		return
 	}
