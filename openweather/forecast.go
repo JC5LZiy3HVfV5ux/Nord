@@ -19,7 +19,7 @@ func newForecast(client *http.Client, opt *options) *Forecast {
 	}
 }
 
-func (f *Forecast) ForecastByCoordinates(ctx context.Context, model *ForecastData, lat, lon float64, cnt int) error {
+func (f *Forecast) ForecastByCoordinates(ctx context.Context, model *ForecastData, lat, lon float64, cnt uint64) error {
 	if err := ValidCoordinates(lat, lon); err != nil {
 		return err
 	}
