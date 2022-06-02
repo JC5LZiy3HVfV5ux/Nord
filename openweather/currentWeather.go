@@ -41,7 +41,7 @@ func (c *CurrentWeather) CurrentByCityName(ctx context.Context, model *CurrentWe
 	return nil
 }
 
-func (c *CurrentWeather) CurrentByCityId(ctx context.Context, model *CurrentWeatherData, id int64) error {
+func (c *CurrentWeather) CurrentByCityId(ctx context.Context, model *CurrentWeatherData, id uint64) error {
 	values := url.Values{}
 	values.Add("id", fmt.Sprintf("%d", id))
 	if err := c.sender.do(ctx, http.MethodGet, c.buildPath(values), model, nil); err != nil {
