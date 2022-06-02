@@ -43,7 +43,7 @@ func (f *Forecast) ForecastByCityName(ctx context.Context, model *ForecastData, 
 	return nil
 }
 
-func (f *Forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id int64, cnt uint64) error {
+func (f *Forecast) ForecastByCityId(ctx context.Context, model *ForecastData, id uint64, cnt uint64) error {
 	values := url.Values{}
 	values.Add("id", fmt.Sprintf("%d", id))
 	values.Add("cnt", fmt.Sprintf("%d", cnt))

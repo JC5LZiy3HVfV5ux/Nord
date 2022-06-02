@@ -41,13 +41,13 @@ func (p parser) parseCityName(query url.Values) (q string, err error) {
 	return
 }
 
-func (p parser) parseCityID(query url.Values) (id int64, err error) {
+func (p parser) parseCityID(query url.Values) (id uint64, err error) {
 	if query.Get("id") == "" {
 		err = errors.New("empty id")
 		return
 	}
 
-	if id, err = strconv.ParseInt(query.Get("id"), 10, 64); err != nil {
+	if id, err = strconv.ParseUint(query.Get("id"), 10, 64); err != nil {
 		err = errors.New("invalid id")
 		return
 	}

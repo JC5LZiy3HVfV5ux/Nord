@@ -140,7 +140,7 @@ func TestParseCityID(t *testing.T) {
 	data := []struct {
 		name   string
 		query  url.Values
-		id     int64
+		id     uint64
 		errMsg string
 	}{
 		{
