@@ -49,7 +49,7 @@ func TestParseCoordinates(t *testing.T) {
 				"lat": {"10"},
 				"lon": {"ttt"},
 			},
-			10,
+			0,
 			0,
 			"invalid longitude",
 		},
