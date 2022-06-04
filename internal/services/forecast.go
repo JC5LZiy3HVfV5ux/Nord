@@ -35,7 +35,7 @@ func (f *ForecastService) ForecastByCoordinates(ctx context.Context, lat, lon fl
 		if err := f.forecast.ForecastByCoordinates(ctx, model, lat, lon, cnt); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -59,7 +59,7 @@ func (f *ForecastService) ForecastByCityName(ctx context.Context, q string, cnt 
 		if err := f.forecast.ForecastByCityName(ctx, model, q, cnt); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -83,7 +83,7 @@ func (f *ForecastService) ForecastByCityId(ctx context.Context, id uint64, cnt u
 		if err := f.forecast.ForecastByCityId(ctx, model, id, cnt); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -107,7 +107,7 @@ func (f *ForecastService) ForecastByZip(ctx context.Context, zip string, cnt uin
 		if err := f.forecast.ForecastByZip(ctx, model, zip, cnt); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 

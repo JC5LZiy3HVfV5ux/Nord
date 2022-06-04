@@ -31,7 +31,7 @@ func (c *CurrentWeatherService) CurrentByCoordinates(ctx context.Context, lat, l
 		if err := c.currentWeather.CurrentByCoordinates(ctx, model, lat, lon); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -55,7 +55,7 @@ func (c *CurrentWeatherService) CurrentByCityName(ctx context.Context, q string)
 		if err := c.currentWeather.CurrentByCityName(ctx, model, q); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -79,7 +79,7 @@ func (c *CurrentWeatherService) CurrentByCityId(ctx context.Context, id uint64) 
 		if err := c.currentWeather.CurrentByCityId(ctx, model, id); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
@@ -103,7 +103,7 @@ func (c *CurrentWeatherService) CurrentByZip(ctx context.Context, zip string) (*
 		if err := c.currentWeather.CurrentByZip(ctx, model, zip); err != nil {
 			log.Println(err)
 
-			if errors.Is(err, errOpenweather) {
+			if errors.As(err, &errOpenweather) {
 				return nil, err
 			}
 
