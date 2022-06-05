@@ -9,8 +9,11 @@
 
 - [Current weather data](https://openweathermap.org/current) and [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5).
   ✅ by geographic coordinates
+
   ✅ by city name
+
   ✅ by city ID
+
   ✅ by ZIP code
 
   [swagger](swagger.md)
@@ -19,23 +22,31 @@
 
 - [Current weather data](https://openweathermap.org/current)
   ✅ by geographic coordinates
+
   ✅ by city name
+
   ✅ by city ID
+
   ✅ by ZIP code
 
   [example](./pkg/openweather/examples/currentWeather/main.go)
 
 - [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5)
   ✅ by geographic coordinates
+
   ✅ by city name
+
   ✅ by city ID
+
   ✅ by ZIP code
 
   [example](./pkg/openweather/examples/forecast/main.go)
 
 - [Geocoding](https://openweathermap.org/api/geocoding-api)
   ✅ Coordinates by location name
+
   ✅ Coordinates by zip/post code
+
   ✅ Reverse geocoding
 
   [example](./pkg/openweather/examples/geocoding/main.go)
@@ -61,7 +72,7 @@
 
   И получить ответ:
 
-  ```json
+  ```
   HTTP/1.1 200 OK
   content-type: text/plain;charset=UTF-8
 
