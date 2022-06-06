@@ -8,46 +8,39 @@
 **Caching proxy server:**
 
 - [Current weather data](https://openweathermap.org/current) and [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5).
-  ✅ by geographic coordinates
 
-  ✅ by city name
-
-  ✅ by city ID
-
-  ✅ by ZIP code
+  [x] by geographic coordinates
+  [x] by city name
+  [x] by city ID
+  [x] by ZIP code
 
   [swagger](swagger.md)
 
 **OpenWeather client:**
 
 - [Current weather data](https://openweathermap.org/current)
-  ✅ by geographic coordinates
 
-  ✅ by city name
-
-  ✅ by city ID
-
-  ✅ by ZIP code
+  [x] by geographic coordinates
+  [x] by city name
+  [x] by city ID
+  [x] by ZIP code
 
   [example](./pkg/openweather/examples/currentWeather/main.go)
 
 - [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5)
-  ✅ by geographic coordinates
 
-  ✅ by city name
-
-  ✅ by city ID
-
-  ✅ by ZIP code
+  [x] by geographic coordinates
+  [x] by city name
+  [x] by city ID
+  [x] by ZIP code
 
   [example](./pkg/openweather/examples/forecast/main.go)
 
 - [Geocoding](https://openweathermap.org/api/geocoding-api)
-  ✅ Coordinates by location name
 
-  ✅ Coordinates by zip/post code
-
-  ✅ Reverse geocoding
+  [x] Coordinates by location name
+  [x] Coordinates by zip/post code
+  [x] Reverse geocoding
 
   [example](./pkg/openweather/examples/geocoding/main.go)
 
