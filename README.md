@@ -9,10 +9,10 @@
 
 - [Current weather data](https://openweathermap.org/current) and [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5).
 
-  [x] by geographic coordinates
-  [x] by city name
-  [x] by city ID
-  [x] by ZIP code
+  - [x] by geographic coordinates
+  - [x] by city name
+  - [x] by city ID
+  - [x] by ZIP code
 
   [swagger](swagger.md)
 
@@ -20,27 +20,27 @@
 
 - [Current weather data](https://openweathermap.org/current)
 
-  [x] by geographic coordinates
-  [x] by city name
-  [x] by city ID
-  [x] by ZIP code
+  - [x] by geographic coordinates
+  - [x] by city name
+  - [x] by city ID
+  - [x] by ZIP code
 
   [example](./pkg/openweather/examples/currentWeather/main.go)
 
 - [5 Day / 3 Hour Forecast](https://openweathermap.org/forecast5)
 
-  [x] by geographic coordinates
-  [x] by city name
-  [x] by city ID
-  [x] by ZIP code
+  - [x] by geographic coordinates
+  - [x] by city name
+  - [x] by city ID
+  - [x] by ZIP code
 
   [example](./pkg/openweather/examples/forecast/main.go)
 
 - [Geocoding](https://openweathermap.org/api/geocoding-api)
 
-  [x] Coordinates by location name
-  [x] Coordinates by zip/post code
-  [x] Reverse geocoding
+  - [x] Coordinates by location name
+  - [x] Coordinates by zip/post code
+  - [x] Reverse geocoding
 
   [example](./pkg/openweather/examples/geocoding/main.go)
 
