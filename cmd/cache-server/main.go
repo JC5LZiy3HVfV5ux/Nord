@@ -12,13 +12,12 @@ func init() {
 	file, err := os.OpenFile("/var/log/server/server.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 
 	if err != nil {
-		log.Println("Не создался файл логов: ", err)
-		return
+		log.Fatal("Invalid open logs file: ", err)
 	}
 
 	log.SetOutput(file)
 
-	log.Println("Создание логов... ok")
+	log.Println("Create logs file... ok")
 }
 
 func main() {
