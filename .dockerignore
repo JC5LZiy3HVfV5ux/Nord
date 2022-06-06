@@ -1,0 +1,9 @@
+logs
+*.md
+.dockerignore
+*.yml
+Dockerfile
+*.env
+.gitignore
+redis
+nginx
