@@ -8,10 +8,12 @@ import (
 	"github.com/JC5LZiy3HVfV5ux/nord/pkg/openweather"
 )
 
-var (
-	errResponseService = errors.New("internal server error")
-	errOpenweather     *openweather.HttpError
-)
+var errResponseService = errors.New("internal server error")
+
+func asErrOpenweather(err error) bool {
+	var errOpenweather *openweather.HttpError
+	return errors.As(err, &errOpenweather)
+}
 
 type CurrentWeather interface {
 	CurrentByCoordinates(ctx context.Context, lat, lon float64) (*openweather.CurrentWeatherData, error)
